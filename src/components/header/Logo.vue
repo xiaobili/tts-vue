@@ -39,7 +39,7 @@
 }
 
 .box:before {
-  content: "52";
+  content: "B";
   position: absolute;
   top: 0;
   background: #67c23a;
@@ -54,7 +54,7 @@
 
 .box:nth-child(2)::before {
   transform: translateY(-100%);
-  content: "PJ";
+  content: "I";
 }
 
 .box:nth-child(3)::before {
@@ -63,15 +63,15 @@
 
 .box:nth-child(4)::before {
   transform: translateY(-100%);
-  content: "O";
+  content: "L";
 }
 
 .box:nth-child(5)::before {
-  content: "K";
+  content: "Y";
 }
 .box:nth-child(6)::before {
   transform: translateY(-100%);
-  content: "E";
+  content: "J";
 }
 .box:nth-child(7)::before {
   content: "R";

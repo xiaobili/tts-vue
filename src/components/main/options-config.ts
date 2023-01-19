@@ -1,4 +1,28 @@
-const voicesList = [
+
+
+type Voice = {
+    Name: string;
+    DisplayName: string;
+    LocalName: string;
+    ShortName: string;
+    Gender: string;
+    Locale: string;
+    LocaleName: string;
+    SampleRateHertz: string;
+    VoiceType: string;
+    Status: string;
+    WordsPerMinute?: string;
+    iconLoading?: boolean;
+    StyleList?: string[];
+    SecondaryLocaleList?: string[];
+    ExtendedPropertyMap?: {
+      [key: string]: string;
+    };
+    RolePlayList?: string[];
+
+}
+
+const voicesList:Voice[] = [
   {
     Name: "Microsoft Server Speech Text to Speech Voice (af-ZA, AdriNeural)",
     DisplayName: "Adri",
@@ -6457,6 +6481,8 @@ const voicesList = [
   },
 ];
 
+
+
 const list = voicesList.map(({ LocaleName }) => LocaleName);
 
 const set = new Set(list);
@@ -6467,6 +6493,10 @@ const languageSelect = [...set].map((item) => ({
 
 const findVoicesByLocaleName = (localeName: any) => {
   const voices = voicesList.filter((item) => item.LocaleName == localeName);
+  for (const item of voices) {
+    item.iconLoading = false;
+  }
+  
   return voices;
 };
 

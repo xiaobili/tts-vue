@@ -30,11 +30,14 @@
               }}</span>
               <el-button
                 size="small"
-                type="success"
                 circle
-                @click.stop="audition(item.ShortName)"
-                ><el-icon><CaretRight /></el-icon
-              ></el-button>
+                @click.stop="audition(item.ShortName,item.LocalName)"
+                :loading="item.iconLoading"
+                :loading-icon="VideoPlay"
+                :disabled="voiceLoading"
+                :icon="VideoPlay"
+                style="margin-top: 5px;"
+                ></el-button>
             </div>
           </el-option>
         </el-select>
@@ -136,6 +139,7 @@ import Loading from "./Loading.vue";
 import { ElMessage, ElMessageBox } from "element-plus";
 import { useTtsStore } from "@/store/store";
 import { storeToRefs } from "pinia";
+import { VideoPlay } from "@element-plus/icons-vue";
 
 const ttsStore = useTtsStore();
 const {
@@ -146,12 +150,19 @@ const {
   currConfigName,
   config,
   isLoading,
+  voiceLoading,
 } = storeToRefs(ttsStore);
 const Store = require("electron-store");
 const store = new Store();
 
-const audition = (value: string) => {
-  ttsStore.audition(value);
+const audition = (value: string,localName:string) => {
+  voiceLoading.value = true;
+  voiceSelectList.value.forEach((item: any) => {
+    if (item.LocalName == localName) {
+      item.iconLoading = true;
+    }
+  });
+  ttsStore.audition(value,localName);
 };
 
 watch(formConfig.value, (newValue) => {

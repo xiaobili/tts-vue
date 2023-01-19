@@ -29,11 +29,11 @@ ttsStore.setSSMLValue();
 <style>
 body {
   margin: 0;
-  /* height: 570px; */
+  height: 570px;
 }
 .app {
   background-color: #f2f3f5;
-  border-radius: 10px;
+  border-radius: 0px;
 }
 .el-header {
   border: 0 !important;
@@ -56,7 +56,8 @@ body {
   padding: 0 !important;
   margin-left: 5px;
 }
-.main-footer {
+
+.main-footer { 
   height: 100%;
   display: flex;
 }

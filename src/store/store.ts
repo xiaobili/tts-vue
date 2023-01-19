@@ -4,6 +4,7 @@ import { defineStore } from "pinia";
 import getTTSData from "./play";
 import { ElMessage } from "element-plus";
 import { h } from "vue";
+import { optionsConfig as oc } from "@/components/main/options-config";
 const fs = require("fs");
 const path = require("path");
 const Store = require("electron-store");
@@ -16,14 +17,15 @@ export const useTtsStore = defineStore("ttsStore", {
   state: () => {
     return {
       inputs: {
-        inputValue: "你好啊\n今天天气怎么样?",
-        ssmlValue: "你好啊\n今天天气怎么样?",
+        inputValue: "",
+        ssmlValue: "",
       },
       formConfig: store.get("FormConfig.默认"),
       page: {
         asideIndex: "1",
         tabIndex: "1",
       },
+      
       tableData: <any>[], // 文件列表的数据
       currConfigName: "默认", // 当前配置的名字
       config: {
@@ -36,6 +38,7 @@ export const useTtsStore = defineStore("ttsStore", {
         updateNotification: store.get("updateNotification"),
       },
       isLoading: false,
+      voiceLoading: false,
       currMp3Buffer: Buffer.alloc(0),
       currMp3Url: "",
       audioPlayer: null,
@@ -324,7 +327,7 @@ export const useTtsStore = defineStore("ttsStore", {
       });
       ipcRenderer.send("log.info", `下载完成:${filePath}`);
     },
-    async audition(val: string) {
+    async audition(val: string,localName:string) {
       const inps = {
         activeIndex: 1, // 值转换普通文本
         inputValue: this.config.audition,
@@ -341,6 +344,12 @@ export const useTtsStore = defineStore("ttsStore", {
         const svlob = new Blob([mp3buffer]);
         const sound = new Audio(URL.createObjectURL(svlob));
         sound.play();
+        this.voiceLoading = false;
+        oc.voicesList.forEach((item: any) => {
+          if (item.LocalName == localName) {
+            item.iconLoading = false;
+          }
+        });
       });
     },
     showItemInFolder(filePath: string) {

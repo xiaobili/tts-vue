@@ -93,7 +93,6 @@
           </el-dropdown>
         </el-form-item>
       </el-form>
-      <Donate></Donate>
     </div>
   </div>
 </template>
@@ -103,7 +102,6 @@ import { reactive, ref } from "vue";
 import { ElMessage } from "element-plus";
 import { useTtsStore } from "@/store/store";
 import { storeToRefs } from "pinia";
-import Donate from "./Donate.vue";
 
 const { ipcRenderer, shell } = require("electron");
 
@@ -192,8 +190,7 @@ const updateNotificationChange = () => {
 
 .el-form {
   margin-top: 7px;
-  border-right: 1px solid #dcdfe6;
-  width: 60%;
+  width: 100%;
   padding-left: 10px;
 }
 :deep(.input-path .el-input-group__append) {
@@ -226,18 +223,19 @@ const updateNotificationChange = () => {
   padding: 3px 0 !important;
 }
 .el-form-item {
-  width: 37vw;
-  margin-bottom: 8px;
+  width: 80vw;
+  margin-bottom: 10px;
 }
 .btns {
   width: 100%;
   box-sizing: border-box;
   padding-right: 10px;
+  margin-bottom: 10px;
 }
 :deep(.btns .el-form-item__content) {
   justify-content: space-between;
 }
 .el-button + .el-button {
-  margin-left: 0;
+  margin-left: 10px;
 }
 </style>

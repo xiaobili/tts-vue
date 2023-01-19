@@ -16,7 +16,7 @@
         <el-input
           v-model="inputs.inputValue"
           type="textarea"
-          placeholder="Please input"
+          placeholder="请输入需要转换的文本"
         />
       </div>
       <div class="text-area2" v-show="page.tabIndex == '2'">
@@ -88,7 +88,7 @@
           :on-change="fileChange"
           :on-remove="fileRemove"
           show-file-list="false"
-          accept=".txt"
+          accept=".md"
           multiple
         >
           <template #trigger>
@@ -96,7 +96,7 @@
           </template>
 
           <template #tip>
-            <div class="el-upload__tip">文本格式为： *.txt</div>
+            <div class="el-upload__tip">文本格式为： *.md</div>
           </template>
         </el-upload>
         <el-button type="warning" @click="clearAll"
